@@ -1,0 +1,17 @@
+
+model_config:
+  quant8: False
+  quant4: False
+  token: ${HF_TOKEN}
+  peft: False
+  awq: True
+  fuse_layers: False
+  use_flash_attn: False
+
+data_config:
+  task_type: cls_toxic
+  prefix: 'токсичный текст: '
+  collator_type: simple
+  max_target_len: 5
+  max_input_len: 1024
+  per_device_inference_batch_size: 40

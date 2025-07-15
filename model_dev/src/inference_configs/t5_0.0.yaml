@@ -1,0 +1,21 @@
+train_config:
+  per_device_eval_batch_size: 256
+  predict_with_generate: True
+  disable_tqdm: False
+  do_train: False
+  do_eval: True
+  bf16: False
+  use_cache: True
+  fp16_full_eval: False
+  include_for_metrics: [inputs]
+
+data_config:
+  target_cats: [Service, Food, Interior, Price]
+  default_answer: {Service: [], Food: [], Interior: [], Price: []}
+  data_type: synth
+  task_type: tag
+  max_target_len: 32
+  max_input_len: 128
+  join_char: I
+  prefix_tag: факты
+  max_negative_examples: 2

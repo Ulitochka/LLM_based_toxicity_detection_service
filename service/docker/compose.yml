@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+
+  vllm_service:
+    restart: always
+    shm_size: 8G
+    image: "vllm_service:latest"
+    container_name: vllm_service
+    ports:
+      - "8008:8000"
+    volumes:
+        - /service/log/:/service/log/
+        - /service/configs:/service/configs/
+        - /service/models:/service/models/
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]

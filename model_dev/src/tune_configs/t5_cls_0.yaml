@@ -1,0 +1,45 @@
+train_config:
+  per_device_train_batch_size: 128
+  per_device_eval_batch_size: 128
+  gradient_accumulation_steps: 2
+  gradient_checkpointing: True
+  num_train_epochs: 15
+  eval_steps: 100
+  save_steps: 100
+  logging_steps: 5
+  eval_strategy: steps
+  save_strategy: steps
+  do_train: True
+  do_eval: True
+  load_best_model_at_end: True
+  log_level: info
+  logging_strategy: steps
+  disable_tqdm: True
+  remove_unused_columns: False
+  bf16: False
+  metric_for_best_model: eval_f1
+  greater_is_better: True
+  fp16_full_eval: False
+  predict_with_generate: True
+  use_cache: False
+
+optimizer_config:
+  max_grad_norm: 1.0
+  optim: adamw_torch
+  weight_decay: 0.1
+  learning_rate: 3e-5
+  warmup_steps: 300
+  sheduler: cosine
+
+model_config:
+  model: ai-forever/ruT5-base
+  quant8: False
+  quant4: False
+  use_cache: False
+  token: ${HF_TOKEN}
+
+data_config:
+  task_type: cls_toxic
+  max_target_len: 5
+  max_input_len: 256
+  prefix: 'токсичный текст: '

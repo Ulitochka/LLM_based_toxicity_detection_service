@@ -1,0 +1,51 @@
+train_config:
+  per_device_train_batch_size: 2
+  per_device_eval_batch_size: 2
+  gradient_accumulation_steps: 16
+  num_train_epochs: 3
+  eval_steps: 100
+  save_steps: 100
+  logging_steps: 10
+  eval_strategy: steps
+  save_strategy: steps
+  do_train: True
+  do_eval: True
+  log_level: info
+  logging_strategy: steps
+  disable_tqdm: True
+  remove_unused_columns: False
+  bf16: False
+  tf32: False
+  prediction_loss_only: True
+
+optimizer_config:
+  max_grad_norm: 1.0
+  optim: adamw_torch
+  weight_decay: 0.1
+  lr_scheduler_type: cosine 
+  learning_rate: 3e-5
+  warmup_steps: 0
+
+model_config:
+  model: google/gemma-2-2b-it
+  quant8: False
+  quant4: True
+  token: ${HF_TOKEN}
+  peft: True
+
+lora_config:
+  task_type: CAUSAL_LM
+  lora_r: 16
+  lora_bias: "all"
+  target_modules: []
+  lora_alpha: 32
+  lora_dropout: 0
+  init_lora_weights: gaussian
+
+data_config:
+  task_type: cls_toxic
+  prefix: 'токсичный текст: '
+  collator_type: chat
+  max_target_len: 5
+  max_input_len: 1024
+  per_device_inference_batch_size: 20

@@ -1,0 +1,18 @@
+
+model_config:
+  model: google/gemma-2-2b-it
+  quant8: False
+  quant4: True
+  token: ${HF_TOKEN}
+  peft: True
+  awq: False
+  fuse_layers: False
+  use_flash_attn: False
+
+data_config:
+  task_type: cls_toxic
+  prefix: 'токсичный текст: '
+  collator_type: chat
+  max_target_len: 5
+  max_input_len: 1024
+  per_device_inference_batch_size: 2
